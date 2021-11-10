@@ -13,7 +13,7 @@ with
        , {{ dbt_utils.surrogate_key(['creditcardid']) }} as sk_creditcardid
 
        --Information
-       , orderdate
+       , orderdate --Já estão em formato timestamp 
        , shipdate
        , duedate
        , salesorderheader.status

@@ -10,6 +10,7 @@ sources:
       - name: unitmeasure
       - name: customer
       - name: store
+      - name: salesperson
       - name: specialofferproduct
       - name: specialoffer
       - name: salesreason
