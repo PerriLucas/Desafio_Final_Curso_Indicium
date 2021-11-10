@@ -5,8 +5,8 @@ sources:
     description: Adventure Works tables
     tables:
       - name: product
-      - name: productcategories
-      - name: productsubcategorie
+      - name: productcategory
+      - name: productsubcategory
       - name: unitmeasure
       - name: customer
       - name: store
@@ -20,6 +20,5 @@ sources:
       - name: address
       - name: stateprovince
       - name: countryregion
-      - name: salestaxrate
       - name: salesorderheader
       - name: salesorderdetail
