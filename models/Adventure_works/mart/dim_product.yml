@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: dim_product
+    description: Product dimension table
+    columns:
+      - name: 'sk_productid'
+        description: "Primary key. Composed of product ID"
+        tests:
+          - not_null:
+              severity: error
+          - unique: 
+              severity: error
+      - name: 'sk_categoryid'
+        description: "Foreign Key. Composed of category ID"
+        tests: 
+          - not_null:
+              severity: error
+      - name: 'sk_subcategoryid'
+        description: "Foreign Key. Composed of subcategory ID"
+        tests: 
+          - not_null: 
+              severity: error

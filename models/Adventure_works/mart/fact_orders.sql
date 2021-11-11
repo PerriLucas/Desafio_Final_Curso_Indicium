@@ -119,6 +119,6 @@ with
         , sales_card_customer_location.freight
         , sales_card_customer_location.totaldue
     from sales_details_product
-    left join sales_card_customer_location on sales_card_customer_location.sk_salesorderid=sales_details_product.sk_salesorderid
+    right join sales_card_customer_location on sales_card_customer_location.sk_salesorderid=sales_details_product.sk_salesorderid
 )
-select distinct * from sales_final
+select * from sales_final

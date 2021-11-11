@@ -33,4 +33,3 @@ select
     , firstname
     , lastname
 from salesperson_info
-where sk_businessentityid is not null
