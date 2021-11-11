@@ -21,10 +21,11 @@ with
         , sales_reason.reasontype
         , sales_order_reason.sk_salesorderid
     from sales_reason
-    left join sales_order_reason on sales_reason.sk_salesreasonid=sales_order_reason.sk_salesorderid
+    left join sales_order_reason on sales_reason.sk_salesreasonid=sales_order_reason.sk_salesreasonid
 )
-select 
-    sk_salesreasonid
+select distinct
+    sk_salesorderid
+    , sk_salesreasonid
     , name
     , reasontype
  from sales_reason_final
