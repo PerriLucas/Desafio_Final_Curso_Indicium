@@ -14,4 +14,3 @@ with
     from {{ source('desafio_final','address') }} 
     )
     select * from source 
-    where sk_addressid is not null

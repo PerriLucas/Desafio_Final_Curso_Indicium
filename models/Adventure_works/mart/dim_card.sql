@@ -8,3 +8,4 @@ with
         from {{ ref('stg_creditcard') }}
     )
 select* from card_type
+where sk_creditcardid is not null

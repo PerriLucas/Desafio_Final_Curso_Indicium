@@ -72,3 +72,4 @@ with
     left join categorization on product.sk_subcategoryid=categorization.sk_subcategoryid
 )
 select * from products_categorized
+where sk_productid is not null

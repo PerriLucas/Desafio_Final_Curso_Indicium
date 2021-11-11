@@ -28,3 +28,4 @@ select
     , name
     , reasontype
  from sales_reason_final
+ where sk_salesreasonid is not null
