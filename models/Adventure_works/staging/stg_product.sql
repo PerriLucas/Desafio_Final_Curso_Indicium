@@ -1,15 +1,15 @@
 with 
     source as (
-        select
+        select distinct
         
         -- Primary key
        {{ dbt_utils.surrogate_key(['productid']) }} as sk_productid
 
        --Foreign Keys
-       , {{ dbt_utils.surrogate_key(['productmodelid']) }} as sk_model
-       , {{ dbt_utils.surrogate_key(['productsubcategoryid']) }} as sk_subcategory
-       , {{ dbt_utils.surrogate_key(['sizeunitmeasurecode']) }} as sk_sizeunitmeasure
-       , {{ dbt_utils.surrogate_key(['weightunitmeasurecode']) }} as sk_weightunitmeasure
+       , {{ dbt_utils.surrogate_key(['productmodelid']) }} as sk_modelid
+       , {{ dbt_utils.surrogate_key(['productsubcategoryid']) }} as sk_subcategoryid
+       , {{ dbt_utils.surrogate_key(['sizeunitmeasurecode']) }} as sk_sizeunitmeasureid
+       , {{ dbt_utils.surrogate_key(['weightunitmeasurecode']) }} as sk_weightunitmeasureid
 
        --Information
        , name as product_name

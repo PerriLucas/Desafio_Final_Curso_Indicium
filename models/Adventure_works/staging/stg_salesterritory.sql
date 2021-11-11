@@ -1,9 +1,9 @@
 with 
     source as (
-        select
+        select distinct
         
         -- Primary key
-       {{ dbt_utils.surrogate_key(['territoryid']) }} as sk_territoryid
+       {{ dbt_utils.surrogate_key(['territoryid']) }}  as sk_territoryid
 
        --Foreign Keys
        , {{ dbt_utils.surrogate_key(['countryregioncode']) }} as sk_countryregioncode

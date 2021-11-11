@@ -1,9 +1,9 @@
 with 
     source as (
-        select
+        select distinct
         
         -- Primary key
-       {{ dbt_utils.surrogate_key(['productcategoryid']) }} as sk_category
+       {{ dbt_utils.surrogate_key(['productcategoryid']) }} as sk_categoryid
 
        --Information
        , name as category_name

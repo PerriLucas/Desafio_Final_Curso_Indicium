@@ -1,6 +1,6 @@
 with 
     source as (
-        select
+        select distinct
         
         -- Primary key
        {{ dbt_utils.surrogate_key(['addressid']) }} as sk_addressid
@@ -14,3 +14,4 @@ with
     from {{ source('desafio_final','address') }} 
     )
     select * from source 
+    where sk_addressid is not null

@@ -1,14 +1,14 @@
 with 
     source as (
-        select
+        select distinct
         
         -- Primary key
-       {{ dbt_utils.surrogate_key(['businessentityid']) }} as sk_businessentity
+       {{ dbt_utils.surrogate_key(['businessentityid']) }} as sk_storeid
 
        --Foreign Keys
 
        --Information
-       ,name
+       ,name as store_name
     
     from {{ source('desafio_final','store') }} 
     )

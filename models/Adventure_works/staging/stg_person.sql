@@ -1,6 +1,6 @@
 with 
     source as (
-        select
+        select distinct
         
         -- Primary key
        {{ dbt_utils.surrogate_key(['businessentityid']) }} as sk_businessentityid
