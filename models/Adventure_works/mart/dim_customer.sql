@@ -53,3 +53,4 @@ with
     full join person on customer_with_store.sk_personid=person.sk_businessentityid
 )
 select * from customer_complete
+where sk_customerid is not null

@@ -68,7 +68,7 @@ with
     from sales_territory
     left join country_complete on sales_territory.sk_countryregioncode=country_complete.sk_countryregioncode
 )
-select * from location
+select distinct * from location
 where sk_addressid is not null
 and sk_stateprovinceid is not null
 and sk_territoryid is not null

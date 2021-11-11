@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: Sales fact table
+    columns:
+      - name: 'sk_salesorderid'
+        description: "Primary key. Composed of sales ID"
+        tests:
+          - not_null:
+              severity: error
+      - name: 'sk_salesorderdetailid'
+        description: "Foreign key. Composed of sales details ID"
+        tests:
+          - not_null:
+              severity: error
+          - relationships:
+              to: ref('stg_salesorderdetail')
+              field: sk_salesorderdetailid
+      - name: sk_productid
+        description: "Foreign key. Composed of product ID"
+        tests:
+          - not_null: 
+              severity: error
+          - relationships:
+              to: ref('dim_products')
+              field: sk_productid
+      - name: sk_businessentityid
+        description: "Secondary key. Composed of business entities ID"
+        tests:
+          - relationships:
+              to: ref('dim_salesperson')
+              field: sk_businessentityid
+      - name: sk_customerid
+        description: "Foreign key. Composed of customer ID"
+        tests:
+          - not_null: 
+              severity: error
+          - relationships:
+              to: ref('dim_customers')
+              field: sk_customerid
+      - name: sk_creditcardid
+        description: "Foreign key. Composed of credit card ID"
+        tests:
+          - relationships:
+              to: ref('dim_card')
+              field: sk_creditcardid
+      - name: sk_addressid
+        description: "Foreign key. Composed of credit card ID"
+        tests:
+          - not_null:
+              severity: error
+          - relationships:
+              to: ref('dim_location')
+              field: sk_addressid

@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: dim_card
+    description: Credit Card dimension table
+    columns:
+      - name: 'sk_creditcardid'
+        description: "Primary key. Composed of credit card ID"
+        tests:
+          - not_null:
+              severity: error
+          - unique:
+              severity: error

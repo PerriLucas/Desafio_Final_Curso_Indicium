@@ -30,3 +30,4 @@ select distinct
     , reasontype
  from sales_reason_final
  where sk_salesreasonid is not null
+ and sk_salesorderid is not null

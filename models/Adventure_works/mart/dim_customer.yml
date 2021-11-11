@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: Customer dimension table
+    columns:
+      - name: 'sk_customerid'
+        description: "Primary key. Composed of customer ID"
+        tests:
+          - not_null:
+              severity: error
+          - unique:
+              severity: error

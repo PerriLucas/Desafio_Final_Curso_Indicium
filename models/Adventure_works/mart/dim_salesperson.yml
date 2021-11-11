@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: dim_salesperson
+    description: Employee dimension table
+    columns:
+      - name: 'sk_businessentityid'
+        description: "Primary key. Composed of business entity ID"
+        tests:
+          - not_null:
+              severity: error
+          - unique:
+              severity: error

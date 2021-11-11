@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_reason
+    description: Sale reason dimension table
+    columns:
+      - name: 'sk_salesreasonid'
+        description: "Primary key. Composed of sales reason ID"
+        tests:
+          - not_null:
+              severity: error
+
+      - name: 'sk_salesorderid'
+        description: "Secondary key. Composed of order ID"
+        tests:
+          - not_null:
+              severity: error

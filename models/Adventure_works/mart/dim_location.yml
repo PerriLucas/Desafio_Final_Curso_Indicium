@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: dim_location
+    description: Geographical location dimension table
+    columns:
+      - name: 'sk_addressid'
+        description: "Primary key. Composed of address ID"
+        tests:
+          - not_null:
+              severity: error
+
+      - name: 'sk_stateprovinceid'
+        description: "Secondary key. Composed of state province ID"
+        tests:
+          - not_null:
+              severity: error
+
+      - name: 'sk_territoryid'
+        description: "Secondary key. Composed of territory ID"
+        tests:
+          - not_null:
+              severity: error
+
+      - name: 'sk_countryregioncode'
+        description: "Secondary key. Composed of country/region ID"
+        tests:
+          - not_null:
+              severity: error
+
+      - name: 'isonlystateprovince'
+        description: "Information. Composed of True/False argument of whether the name refers only to the state/province or can a city/region"
+        tests:
+          - accepted_values:
+              values: ['Yes','No']
+              severity: error
