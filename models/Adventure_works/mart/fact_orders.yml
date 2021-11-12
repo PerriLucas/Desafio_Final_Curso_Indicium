@@ -46,7 +46,7 @@ models:
               to: ref('dim_card')
               field: sk_creditcardid
       - name: sk_addressid
-        description: "Foreign key. Composed of credit card ID"
+        description: "Foreign key. Composed of location ID"
         tests:
           - not_null:
               severity: error

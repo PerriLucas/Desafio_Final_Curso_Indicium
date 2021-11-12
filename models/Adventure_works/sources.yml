@@ -14,7 +14,6 @@ sources:
       - name: salesreason
       - name: salesorderheadersalesreason
       - name: creditcard
-      - name: salesterritory
       - name: address
       - name: stateprovince
       - name: countryregion

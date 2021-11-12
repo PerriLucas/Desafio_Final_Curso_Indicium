@@ -38,6 +38,7 @@ with
         , sk_salespersonid
         , sk_territoryid
         , sk_creditcardid
+        , sk_billtoaddressid
         , sk_shiptoaddressid -- The shipping address will be considered for determining the sale location, as opposed to the billing adress
         , orderdate 
         , shipdate
@@ -50,13 +51,13 @@ with
         , totaldue
     from {{ ref('stg_salesorderheader') }}
 )
-, sales_card_customer_location as ( 
+, sales_added as ( 
     select 
         sales.sk_salesorderid
-        , salesperson.sk_businessentityid
         , customer.sk_customerid
-        , location.sk_addressid
+        , salesperson.sk_businessentityid
         , credit_card.sk_creditcardid
+        , location.sk_addressid
         , sales.orderdate
         , sales.shipdate
         , sales.duedate
@@ -68,10 +69,9 @@ with
         , sales.totaldue
     from sales
     left join credit_card on credit_card.sk_creditcardid=sales.sk_creditcardid
-    left join salesperson on salesperson.sk_businessentityid=sales.sk_salespersonid
-    left join customer on customer.sk_customerid = sales.sk_customerid
-    left join location on location.sk_addressid = sales.sk_shiptoaddressid
-    left join reason on reason.sk_salesorderid = sales.sk_salesorderid
+    left join customer on customer.sk_customerid=sales.sk_customerid
+    left join salesperson on salesperson.sk_businessentityid = sales.sk_salespersonid
+    left join location on location.sk_addressid = sales.sk_billtoaddressid
 )
 , sales_details as (
     select
@@ -84,7 +84,7 @@ with
         , unitpricediscount
     from {{ ref('stg_salesorderdetail') }}
 )
-, sales_details_product as (
+, sales_details_added as (
     select
         sales_details.sk_salesorderdetailid
         , sales_details.sk_salesorderid
@@ -97,28 +97,28 @@ with
     left join products on products.sk_productid=sales_details.sk_productid
 )
 , sales_final as (
-    select 
-        sales_details_product.sk_salesorderdetailid
-        , sales_card_customer_location.sk_salesorderid
-        , sales_details_product.sk_productid
-        , sales_details_product.sk_specialofferid
-        , sales_details_product.orderqty
-        , sales_details_product.unitprice
-        , sales_details_product.unitpricediscount
-        , sales_card_customer_location.sk_businessentityid
-        , sales_card_customer_location.sk_customerid
-        , sales_card_customer_location.sk_addressid
-        , sales_card_customer_location.sk_creditcardid
-        , sales_card_customer_location.orderdate
-        , sales_card_customer_location.shipdate
-        , sales_card_customer_location.duedate
-        , sales_card_customer_location.salesstatus
-        , sales_card_customer_location.isonlineorder
-        , sales_card_customer_location.subtotal
-        , sales_card_customer_location.taxamt
-        , sales_card_customer_location.freight
-        , sales_card_customer_location.totaldue
-    from sales_details_product
-    right join sales_card_customer_location on sales_card_customer_location.sk_salesorderid=sales_details_product.sk_salesorderid
+    select
+        sales_details_added.sk_salesorderdetailid
+        , sales_added.sk_salesorderid
+        , sales_details_added.sk_productid
+        , sales_details_added.sk_specialofferid
+        , sales_details_added.orderqty
+        , sales_details_added.unitprice
+        , sales_details_added.unitpricediscount
+        , sales_added.sk_customerid
+        , sales_added.sk_businessentityid
+        , sales_added.sk_creditcardid
+        , sales_added.sk_addressid
+        , sales_added.orderdate
+        , sales_added.shipdate
+        , sales_added.duedate
+        , sales_added.salesstatus
+        , sales_added.isonlineorder
+        , sales_added.subtotal
+        , sales_added.taxamt
+        , sales_added.freight
+        , sales_added.totaldue
+    from sales_details_added
+    left join sales_added on sales_added.sk_salesorderid=sales_details_added.sk_salesorderid
 )
 select * from sales_final
