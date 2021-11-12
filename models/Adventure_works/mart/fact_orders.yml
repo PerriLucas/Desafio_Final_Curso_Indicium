@@ -26,7 +26,7 @@ models:
               to: ref('dim_products')
               field: sk_productid
       - name: sk_businessentityid
-        description: "Secondary key. Composed of business entities ID"
+        description: "Secondary key. Composed of salesperson ID"
         tests:
           - relationships:
               to: ref('dim_salesperson')
@@ -45,8 +45,8 @@ models:
           - relationships:
               to: ref('dim_card')
               field: sk_creditcardid
-      - name: sk_addressid
-        description: "Foreign key. Composed of location ID"
+      - name: sk_billtoaddressid
+        description: "Foreign key. Composed of billing address ID"
         tests:
           - not_null:
               severity: error

@@ -38,8 +38,8 @@ with
         , sk_salespersonid
         , sk_territoryid
         , sk_creditcardid
-        , sk_billtoaddressid
-        , sk_shiptoaddressid -- The shipping address will be considered for determining the sale location, as opposed to the billing adress
+        , sk_billtoaddressid -- The billing address will be considered for determining the sale location, as opposed to the shipping adress
+        , sk_shiptoaddressid 
         , orderdate 
         , shipdate
         , duedate
@@ -54,10 +54,10 @@ with
 , sales_added as ( 
     select 
         sales.sk_salesorderid
-        , customer.sk_customerid
+        , sales.sk_customerid
         , salesperson.sk_businessentityid
         , credit_card.sk_creditcardid
-        , location.sk_addressid
+        , sales.sk_billtoaddressid
         , sales.orderdate
         , sales.shipdate
         , sales.duedate
@@ -99,7 +99,7 @@ with
 , sales_final as (
     select
         sales_details_added.sk_salesorderdetailid
-        , sales_added.sk_salesorderid
+        , sales_details_added.sk_salesorderid
         , sales_details_added.sk_productid
         , sales_details_added.sk_specialofferid
         , sales_details_added.orderqty
@@ -108,7 +108,7 @@ with
         , sales_added.sk_customerid
         , sales_added.sk_businessentityid
         , sales_added.sk_creditcardid
-        , sales_added.sk_addressid
+        , sales_added.sk_billtoaddressid
         , sales_added.orderdate
         , sales_added.shipdate
         , sales_added.duedate
@@ -118,7 +118,7 @@ with
         , sales_added.taxamt
         , sales_added.freight
         , sales_added.totaldue
-    from sales_details_added
-    left join sales_added on sales_added.sk_salesorderid=sales_details_added.sk_salesorderid
+    from sales_added
+    left join sales_details_added on sales_added.sk_salesorderid=sales_details_added.sk_salesorderid
 )
-select * from sales_final
+select distinct * from sales_final
